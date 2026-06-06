@@ -4,3 +4,4 @@ _site
 agent-instructions
 
 .superpowers
+node_modules
