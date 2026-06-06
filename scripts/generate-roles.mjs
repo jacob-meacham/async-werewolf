@@ -34,7 +34,7 @@ for (const role of roles) {
 
   process.stdout.write(`Generating ${role.slug} … `);
   const res = await client.images.generate({
-    model: "gpt-image-1",
+    model: "gpt-image-2",
     prompt: buildPrompt(role),
     size: "1024x1024",
     output_format: "webp",
