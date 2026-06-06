@@ -27,24 +27,36 @@
       {
         "name": "Apprentice Seer",
         "slug": "apprentice-seer",
+        "team": "Village",
+        "race": "Human",
+        "alignment": "Good",
         "night_activity": "Yes (if the Seer dies)",
         "body": "The Apprentice Seer will assume the role of the [Seer](#seer) if the Seer is killed. Until that point, you are a standard Villager with no special powers. The Moderator will notify you when the Seer is killed. The Sorcerer will see you as the Seer only after you have assumed that role."
       },
       {
         "name": "Insane Seer",
         "slug": "insane-seer",
+        "team": "Village",
+        "race": "Human",
+        "alignment": "Good",
         "night_activity": "Yes",
         "body": "Each night, you may choose a target to scan like a [Seer](#seer). However, you always get incorrect scan results. You believe yourself to be a normal Seer."
       },
       {
         "name": "Naive Seer",
         "slug": "naive-seer",
+        "team": "Village",
+        "race": "Human",
+        "alignment": "Good",
         "night_activity": "Yes",
         "body": "Each night, you may choose a target to scan like a [Seer](#seer). However, you will always get \"innocent\" results, regardless of who is investigated. You believe yourself to be a normal Seer."
       },
       {
         "name": "Paranoid Seer",
         "slug": "paranoid-seer",
+        "team": "Village",
+        "race": "Human",
+        "alignment": "Good",
         "night_activity": "Yes",
         "body": "Each night, you may choose a target to scan like a [Seer](#seer). However, you will always get \"guilty\" results, regardless of who is investigated. You believe yourself to be a normal Seer."
       }
@@ -65,18 +77,27 @@
       {
         "name": "Amateur Bodyguard",
         "slug": "amateur-bodyguard",
+        "team": "Village",
+        "race": "Human",
+        "alignment": "Good",
         "night_activity": "Yes",
         "body": "You may protect a player each night (like the [Bodyguard](#bodyguard)) but if you target an active member of the wolf team to protect, YOU are killed. Your death is reported as a normal werewolf kill. You think that you are a regular Bodyguard."
       },
       {
         "name": "Sacrificial Bodyguard",
         "slug": "sacrificial-bodyguard",
+        "team": "Village",
+        "race": "Human",
+        "alignment": "Good",
         "night_activity": "Yes",
         "body": "You may protect a player each night (like the [Bodyguard](#bodyguard)) but if the wolves target your protection target, then YOU die instead. You think that you are a regular Bodyguard."
       },
       {
         "name": "Paranoid Bodyguard",
         "slug": "paranoid-bodyguard",
+        "team": "Village",
+        "race": "Human",
+        "alignment": "Good",
         "night_activity": "Yes",
         "body": "Each night, you may choose a player to protect, like the [Bodyguard](#bodyguard). However, the \"protected\" player is also prevented from taking any nighttime action (like the Harlot). You think that you are a regular Bodyguard."
       }

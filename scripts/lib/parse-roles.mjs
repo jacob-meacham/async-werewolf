@@ -22,7 +22,7 @@ export function parseStats(lines) {
     const m = line.match(/^\*\s+\*\*([A-Z ]+):\*\*\s*(.+?)\s*$/);
     if (!m) break;                 // stats are a contiguous leading block
     const key = STAT_KEYS[m[1].trim()];
-    if (!key) break;
+    if (!key) continue; // unknown stat key — skip it but keep parsing; don't break the loop
     stats[key] = m[2].trim();
   }
   return stats;
@@ -31,7 +31,7 @@ export function parseStats(lines) {
 const CATEGORY_BY_H1 = {
   "Village Team": { category: "village", team: "Village" },
   "Wolf Team": { category: "wolf", team: "Wolf" },
-  "Advanced Teams": { category: "advanced", team: "Advanced" },
+  "Advanced Teams": { category: "advanced", team: "" },
   "Items": { category: "items", team: "" },
 };
 
@@ -77,6 +77,9 @@ export function parseDocument(markdown) {
       current?.variants.push({
         name: entry.name,
         slug: entry.slug,
+        team: entry.team,
+        race: entry.race,
+        alignment: entry.alignment,
         night_activity: entry.night_activity,
         body: entry.body,
       });

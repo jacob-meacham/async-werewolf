@@ -100,3 +100,32 @@ test("wolf roles get category wolf", () => {
   const roles = parseDocument(SAMPLE);
   assert.equal(roles.find((r) => r.slug === "alpha-wolf").category, "wolf");
 });
+
+test("parseStats keeps free-text stat values", () => {
+  assert.deepEqual(
+    parseStats(["* **TEAM:** Starts as Village", "* **NIGHT ACTIVITY:** Per role"]),
+    { team: "Starts as Village", night_activity: "Per role" }
+  );
+});
+
+const SAMPLE_BULLET_BODY = `# Village Team
+
+## Guardian
+* **TEAM:** Village
+* **RACE:** Human
+* **ALIGNMENT:** Good
+* **NIGHT ACTIVITY:** Yes
+
+Each night, protect a player.
+
+* You can't protect the same player twice in a row.
+`;
+
+test("body bullet list is not eaten by stat parsing", () => {
+  const roles = parseDocument(SAMPLE_BULLET_BODY);
+  const guardian = roles.find((r) => r.slug === "guardian");
+  assert.equal(guardian.team, "Village");
+  assert.equal(guardian.night_activity, "Yes");
+  assert.match(guardian.body, /Each night, protect a player/);
+  assert.match(guardian.body, /You can't protect the same player/);
+});
