@@ -1,0 +1,89 @@
+---
+layout: default
+---
+
+<div class="roles-toolbar">
+  <div class="filter-group" role="group" aria-label="Filter by team">
+    <button class="chip is-active" data-filter-team="all">All</button>
+    <button class="chip" data-filter-team="village">Village</button>
+    <button class="chip chip--wolf" data-filter-team="wolf">Wolf</button>
+    <button class="chip" data-filter-team="advanced">Advanced</button>
+  </div>
+  <button class="chip" data-filter-night aria-pressed="false">Night-active</button>
+  <input class="roles-search" type="search" placeholder="Search roles…" aria-label="Search roles">
+</div>
+
+<p class="roles-empty" hidden>No roles match that filter.</p>
+
+<div class="roles-grid">
+  {% for role in site.data.roles %}
+    {% unless role.category == "items" %}
+    <button class="role-card" id="{{ role.slug }}"
+            data-slug="{{ role.slug }}"
+            data-team="{{ role.category }}"
+            data-night="{% if role.night_activity != 'No' and role.night_activity != '' %}yes{% else %}no{% endif %}"
+            data-name="{{ role.name | downcase }}">
+      <span class="role-card__art">
+        <img src="{{ role.image | relative_url }}" alt="" loading="lazy"
+             onerror="this.classList.add('is-missing')">
+      </span>
+      <span class="role-card__name">{{ role.name }}</span>
+      <span class="role-card__meta role-card__meta--{{ role.category }}">
+        {{ role.team | default: 'Item' }}{% if role.night_activity != 'No' and role.night_activity != '' %} &middot; Night{% endif %}
+      </span>
+    </button>
+    {% endunless %}
+  {% endfor %}
+</div>
+
+<section class="roles-items">
+  <h2>Items</h2>
+  <div class="roles-grid roles-grid--items">
+    {% for role in site.data.roles %}
+      {% if role.category == "items" %}
+      <button class="role-card role-card--item" id="{{ role.slug }}" data-slug="{{ role.slug }}" data-team="items" data-night="no" data-name="{{ role.name | downcase }}">
+        <span class="role-card__name">{{ role.name }}</span>
+        <span class="role-card__meta role-card__meta--items">Item</span>
+      </button>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+{% comment %} Hidden detail payloads, one per role; the modal pulls from these. {% endcomment %}
+<div hidden>
+  {% for role in site.data.roles %}
+  <template id="detail-{{ role.slug }}">
+    <p class="detail-stats">
+      {% if role.team != "" %}<span>TEAM <b>{{ role.team }}</b></span>{% endif %}
+      {% if role.race != "" %}<span>RACE <b>{{ role.race }}</b></span>{% endif %}
+      {% if role.alignment != "" %}<span>ALIGNMENT <b>{{ role.alignment }}</b></span>{% endif %}
+      {% if role.night_activity != "" %}<span>NIGHT <b>{{ role.night_activity }}</b></span>{% endif %}
+    </p>
+    <div class="detail-body">{{ role.body | markdownify }}</div>
+    {% if role.variants and role.variants.size > 0 %}
+    <div class="detail-variants">
+      {% for v in role.variants %}
+      <div class="variant" id="{{ v.slug }}">
+        <h3>{{ v.name }}</h3>
+        {% if v.night_activity != "" %}<p class="detail-stats"><span>NIGHT <b>{{ v.night_activity }}</b></span></p>{% endif %}
+        <div class="detail-body">{{ v.body | markdownify }}</div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </template>
+  {% endfor %}
+</div>
+
+<div class="role-modal" id="role-modal" hidden role="dialog" aria-modal="true" aria-labelledby="role-modal-title">
+  <div class="role-modal__backdrop" data-close></div>
+  <div class="role-modal__panel" role="document">
+    <button class="role-modal__close" data-close aria-label="Close">&times;</button>
+    <div class="role-modal__art"><img id="role-modal-img" src="" alt=""></div>
+    <h2 id="role-modal-title"></h2>
+    <div id="role-modal-content"></div>
+  </div>
+</div>
+
+<script src="{{ '/assets/js/roles.js' | relative_url }}" defer></script>
