@@ -42,7 +42,7 @@ Neutrals are tinted toward the midnight hue; never pure black/white.
 ### Typography
 
 - **Display / headings:** Cormorant Garamond (500/600).
-- **Body:** a readable serif — Spectral or EB Garamond. Body measure capped 65–75ch.
+- **Body:** Spectral (serif). Body measure capped 65–75ch.
 - **Labels / stats / kickers:** IBM Plex Mono.
 - Hierarchy via scale + weight, ratio ≥1.25 between steps.
 
