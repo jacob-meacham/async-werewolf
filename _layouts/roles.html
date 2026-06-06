@@ -21,7 +21,7 @@ layout: default
     <button class="role-card" id="{{ role.slug }}"
             data-slug="{{ role.slug }}"
             data-team="{{ role.category }}"
-            data-night="{% if role.night_activity != 'No' and role.night_activity != '' %}yes{% else %}no{% endif %}"
+            data-night="{% if role.night_activity contains 'Yes' %}yes{% else %}no{% endif %}"
             data-name="{{ role.name | downcase }}">
       <span class="role-card__art">
         <img src="{{ role.image | relative_url }}" alt="" loading="lazy"
@@ -29,7 +29,7 @@ layout: default
       </span>
       <span class="role-card__name">{{ role.name }}</span>
       <span class="role-card__meta role-card__meta--{{ role.category }}">
-        {{ role.team | default: 'Item' }}{% if role.night_activity != 'No' and role.night_activity != '' %} &middot; Night{% endif %}
+        {{ role.team | default: 'Item' }}{% if role.night_activity contains 'Yes' %} &middot; Night{% endif %}
       </span>
     </button>
     {% endunless %}
@@ -78,7 +78,7 @@ layout: default
 
 <div class="role-modal" id="role-modal" hidden role="dialog" aria-modal="true" aria-labelledby="role-modal-title">
   <div class="role-modal__backdrop" data-close></div>
-  <div class="role-modal__panel" role="document">
+  <div class="role-modal__panel">
     <button class="role-modal__close" data-close aria-label="Close">&times;</button>
     <div class="role-modal__art"><img id="role-modal-img" src="" alt=""></div>
     <h2 id="role-modal-title"></h2>

@@ -5,9 +5,18 @@
 
   const cards = Array.from(document.querySelectorAll(".role-card"));
   const emptyMsg = document.querySelector(".roles-empty");
+  const itemsSection = document.querySelector(".roles-items");
   const searchInput = document.querySelector(".roles-search");
   const teamButtons = Array.from(document.querySelectorAll("[data-filter-team]"));
   const nightButton = document.querySelector("[data-filter-night]");
+
+  const variantParent = {};
+  document.querySelectorAll('template[id^="detail-"]').forEach((tpl) => {
+    const parentSlug = tpl.id.slice("detail-".length);
+    tpl.content.querySelectorAll(".variant[id]").forEach((v) => {
+      variantParent[v.id] = parentSlug;
+    });
+  });
 
   const state = { team: "all", night: false, q: "" };
 
@@ -22,6 +31,12 @@
       if (show) visible++;
     }
     if (emptyMsg) emptyMsg.hidden = visible !== 0;
+    if (itemsSection) {
+      const anyItemVisible = cards.some(
+        (c) => c.dataset.team === "items" && !c.classList.contains("is-hidden")
+      );
+      itemsSection.hidden = !anyItemVisible;
+    }
   }
 
   teamButtons.forEach((btn) => {
@@ -89,10 +104,25 @@
     const link = e.target.closest('a[href^="#"]');
     if (link) {
       const slug = link.getAttribute("href").slice(1);
-      if (document.getElementById("detail-" + slug)) {
+      const target = document.getElementById("detail-" + slug) ? slug : variantParent[slug];
+      if (target) {
         e.preventDefault();
-        openRole(slug);
+        openRole(target);
       }
+    }
+  });
+
+  modal.addEventListener("keydown", (e) => {
+    if (e.key !== "Tab") return;
+    const focusable = Array.from(
+      modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')
+    ).filter((el) => el.offsetParent !== null);
+    if (focusable.length === 0) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (e.shiftKey ? document.activeElement === first : document.activeElement === last) {
+      e.preventDefault();
+      (e.shiftKey ? last : first).focus();
     }
   });
 
@@ -102,7 +132,9 @@
 
   function syncFromHash() {
     const slug = location.hash.slice(1);
-    if (slug && document.getElementById("detail-" + slug)) openRole(slug);
+    if (!slug) return;
+    const target = document.getElementById("detail-" + slug) ? slug : variantParent[slug];
+    if (target) openRole(target);
   }
   window.addEventListener("hashchange", syncFromHash);
 

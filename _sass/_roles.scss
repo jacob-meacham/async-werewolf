@@ -134,6 +134,8 @@
   position: absolute; top: 12px; right: 14px;
   background: none; border: none; color: var(--ink-muted);
   font-size: 30px; line-height: 1; cursor: pointer;
+  min-width: 44px; min-height: 44px;
+  display: flex; align-items: center; justify-content: center;
 }
 .role-modal__close:hover { color: var(--moonlight); }
 .role-modal__art img {
