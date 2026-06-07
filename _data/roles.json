@@ -1228,7 +1228,7 @@
     "race": "Human",
     "alignment": "Evil",
     "night_activity": "Yes",
-    "body": "You are a sadistic individual whose goal is to take over the village by eliminating all of your opposition. You are not affiliated with any team.\nEach night, you may choose a player to kill. Each kill advances your cause by whittling down the population. You must be eliminated in order for any other team to win the game.\n\nNote: If you have a [Lover](#lover) and you and your Lover are the sole survivors, the game ends and you (and your Lover) win.",
+    "body": "You are a sadistic individual whose goal is to take over the village by eliminating all of your opposition. You are not affiliated with any team.\nEach night, you may choose a player to kill. Each kill advances your cause by whittling down the population. You must be eliminated in order for any other team to win the game.\n\nNote: If you have a [Lover](#lovers) and you and your Lover are the sole survivors, the game ends and you (and your Lover) win.",
     "category": "advanced",
     "image": "/assets/img/roles/hoodlum.webp",
     "image_prompt": "",
