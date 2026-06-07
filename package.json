@@ -1,0 +1,15 @@
+{
+  "name": "async-werewolf-tools",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Build-time tooling for asyncwerewolf.com (role parser + illustration generator)",
+  "scripts": {
+    "test": "node --test",
+    "parse:roles": "node scripts/parse-roles.mjs",
+    "gen:roles": "node scripts/generate-roles.mjs"
+  },
+  "dependencies": {
+    "openai": "^4.77.0"
+  }
+}

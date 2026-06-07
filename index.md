@@ -1,5 +1,7 @@
 ---
 layout: default
+title: The Game
+body_class: prose
 ---
 
 Werewolf is a game of deception and guile. At its most basic, there is a group of villagers and a hidden group of werewolves. The werewolves know each other's identities and it is the villagers' job to rid their village of the lycan scourge. The game is split up into a day and a night phase. During the day, the whole village determines who to execute. During the night, the wolves determine who to kill. The villagers win if all the werewolves are killed. The wolves win if they outnumber the remaining humans.

@@ -1,0 +1,93 @@
+---
+layout: default
+---
+
+<div class="roles-toolbar">
+  <div class="filter-group" role="group" aria-label="Filter by team">
+    <button class="chip is-active" data-filter-team="all">All</button>
+    <button class="chip" data-filter-team="village">Village</button>
+    <button class="chip chip--wolf" data-filter-team="wolf">Wolf</button>
+    <button class="chip" data-filter-team="advanced">Advanced</button>
+  </div>
+  <button class="chip" data-filter-night aria-pressed="false">Night-active</button>
+  <input class="roles-search" type="search" placeholder="Search roles…" aria-label="Search roles">
+</div>
+
+<p class="roles-empty" hidden>No roles match that filter.</p>
+
+<div class="roles-list">
+  {% for role in site.data.roles %}
+    {% unless role.category == "items" %}
+    <article class="role-entry role-entry--{{ role.category }}" id="{{ role.slug }}"
+             data-team="{{ role.category }}"
+             data-night="{% if role.night_activity contains 'Yes' %}yes{% else %}no{% endif %}"
+             data-name="{{ role.name | downcase }}">
+      <div class="role-entry__art">
+        <img src="{{ role.image | relative_url }}" alt="{{ role.name }}" loading="lazy"
+             onerror="this.classList.add('is-missing')">
+      </div>
+      <div class="role-entry__text">
+        <h2 class="role-entry__name">{{ role.name }}</h2>
+        <p class="detail-stats">
+          {% if role.team != "" %}<span>TEAM <b>{{ role.team }}</b></span>{% endif %}
+          {% if role.race != "" %}<span>RACE <b>{{ role.race }}</b></span>{% endif %}
+          {% if role.alignment != "" %}<span>ALIGNMENT <b>{{ role.alignment }}</b></span>{% endif %}
+          {% if role.night_activity != "" %}<span>NIGHT <b>{{ role.night_activity }}</b></span>{% endif %}
+        </p>
+        <div class="detail-body">{{ role.body | markdownify }}</div>
+        {% if role.variants and role.variants.size > 0 %}
+        <div class="detail-variants">
+          {% for v in role.variants %}
+          <div class="variant" id="{{ v.slug }}">
+            <h3>{{ v.name }}</h3>
+            {% if v.night_activity != "" %}<p class="detail-stats"><span>NIGHT <b>{{ v.night_activity }}</b></span></p>{% endif %}
+            <div class="detail-body">{{ v.body | markdownify }}</div>
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+    </article>
+    {% endunless %}
+  {% endfor %}
+</div>
+
+<section class="roles-items">
+  <h2>Items</h2>
+  {% for role in site.data.roles %}
+    {% if role.category == "items" %}
+    <article class="role-entry role-entry--items" id="{{ role.slug }}"
+             data-team="items"
+             data-night="no"
+             data-name="{{ role.name | downcase }}">
+      <div class="role-entry__art">
+        <img src="{{ role.image | relative_url }}" alt="{{ role.name }}" loading="lazy"
+             onerror="this.classList.add('is-missing')">
+      </div>
+      <div class="role-entry__text">
+        <h2 class="role-entry__name">{{ role.name }}</h2>
+        <p class="detail-stats">
+          {% if role.team != "" %}<span>TEAM <b>{{ role.team }}</b></span>{% endif %}
+          {% if role.race != "" %}<span>RACE <b>{{ role.race }}</b></span>{% endif %}
+          {% if role.alignment != "" %}<span>ALIGNMENT <b>{{ role.alignment }}</b></span>{% endif %}
+          {% if role.night_activity != "" %}<span>NIGHT <b>{{ role.night_activity }}</b></span>{% endif %}
+        </p>
+        <div class="detail-body">{{ role.body | markdownify }}</div>
+        {% if role.variants and role.variants.size > 0 %}
+        <div class="detail-variants">
+          {% for v in role.variants %}
+          <div class="variant" id="{{ v.slug }}">
+            <h3>{{ v.name }}</h3>
+            {% if v.night_activity != "" %}<p class="detail-stats"><span>NIGHT <b>{{ v.night_activity }}</b></span></p>{% endif %}
+            <div class="detail-body">{{ v.body | markdownify }}</div>
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+    </article>
+    {% endif %}
+  {% endfor %}
+</section>
+
+<script src="{{ '/assets/js/roles.js' | relative_url }}" defer></script>

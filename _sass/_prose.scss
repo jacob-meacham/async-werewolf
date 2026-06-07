@@ -1,0 +1,24 @@
+.site-main {
+  h2 { font-size: 30px; margin: 2.4em 0 0.5em; color: var(--moonlight); }
+  h3 { font-size: 23px; margin: 1.8em 0 0.4em; }
+  p, ul, ol { max-width: var(--measure); }
+  p { margin: 0 0 1.1em; }
+  ul, ol { padding-left: 1.3em; }
+  li { margin: 0.3em 0; }
+  strong { color: var(--ink); font-weight: 600; }
+
+  blockquote {
+    margin: 1.4em 0;
+    padding: 0.6em 1.2em;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface-raised);
+    color: var(--ink-muted);
+    font-style: italic;
+  }
+
+  hr { border: none; border-top: 1px solid var(--line); margin: 2.4em 0; }
+
+  // first H1 in markdown bodies is redundant with .page-head; hide it on prose pages
+  &.prose > h1:first-child { display: none; }
+}

@@ -1,6 +1,7 @@
 ---
 layout: default
 title: The Arctic Village
+body_class: prose
 ---
 
 # Setting
