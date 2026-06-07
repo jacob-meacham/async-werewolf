@@ -8,6 +8,16 @@ const OUT = "_data/roles.json";
 const md = await readFile(SRC, "utf8");
 const roles = parseDocument(md);
 
+// One-time migration tool: roles.md is now the gallery page (its role content was
+// migrated into _data/roles.json). Refuse to overwrite the data with an empty parse.
+if (roles.length === 0) {
+  console.error(
+    `Parsed 0 roles from ${SRC}; refusing to overwrite ${OUT}. ` +
+      `roles.md no longer holds role content (it is the gallery page); _data/roles.json is now the source of truth.`
+  );
+  process.exit(1);
+}
+
 await mkdir("_data", { recursive: true });
 await writeFile(OUT, JSON.stringify(roles, null, 2) + "\n", "utf8");
 
