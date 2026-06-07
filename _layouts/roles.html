@@ -50,7 +50,7 @@ layout: default
   </div>
 </section>
 
-{% comment %} Hidden detail payloads, one per role; the modal pulls from these. {% endcomment %}
+{% comment %} Hidden detail payloads, one per role; the inline detail panel pulls from these. {% endcomment %}
 <div hidden>
   {% for role in site.data.roles %}
   <template id="detail-{{ role.slug }}">
@@ -74,16 +74,6 @@ layout: default
     {% endif %}
   </template>
   {% endfor %}
-</div>
-
-<div class="role-modal" id="role-modal" hidden role="dialog" aria-modal="true" aria-labelledby="role-modal-title">
-  <div class="role-modal__backdrop" data-close></div>
-  <div class="role-modal__panel">
-    <button class="role-modal__close" data-close aria-label="Close">&times;</button>
-    <div class="role-modal__art"><img id="role-modal-img" src="" alt=""></div>
-    <h2 id="role-modal-title"></h2>
-    <div id="role-modal-content"></div>
-  </div>
 </div>
 
 <script src="{{ '/assets/js/roles.js' | relative_url }}" defer></script>
