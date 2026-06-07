@@ -38,7 +38,7 @@ for (const role of roles) {
     prompt: buildPrompt(role),
     size: "1024x1024",
     output_format: "webp",
-    quality: "high",
+    quality: "medium",
   });
   const b64 = res.data[0].b64_json;
   await writeFile(out, Buffer.from(b64, "base64"));
