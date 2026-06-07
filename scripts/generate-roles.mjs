@@ -27,23 +27,34 @@ await mkdir(OUT_DIR, { recursive: true });
 const client = new OpenAI();
 
 let made = 0, skipped = 0;
+const failed = [];
 for (const role of roles) {
   if (only && !only.includes(role.slug)) continue;
   const out = `${OUT_DIR}/${role.slug}.webp`;
   if (!force && (await fileExists(out))) { skipped++; continue; }
 
   process.stdout.write(`Generating ${role.slug} … `);
-  const res = await client.images.generate({
-    model: "gpt-image-2",
-    prompt: buildPrompt(role),
-    size: "1024x1024",
-    output_format: "webp",
-    quality: "medium",
-  });
-  const b64 = res.data[0].b64_json;
-  await writeFile(out, Buffer.from(b64, "base64"));
-  made++;
-  console.log("done");
+  try {
+    const res = await client.images.generate({
+      model: "gpt-image-2",
+      prompt: buildPrompt(role),
+      size: "1024x1024",
+      output_format: "webp",
+      quality: "medium",
+    });
+    await writeFile(out, Buffer.from(res.data[0].b64_json, "base64"));
+    made++;
+    console.log("done");
+  } catch (err) {
+    // Don't let one blocked/failed role halt the whole batch; rerun later to fill gaps.
+    const reason = err?.message || String(err);
+    failed.push({ slug: role.slug, reason });
+    console.log(`FAILED (${reason})`);
+  }
 }
 
-console.log(`\nGenerated ${made}, skipped ${skipped} (already existed).`);
+console.log(`\nGenerated ${made}, skipped ${skipped} (already existed), failed ${failed.length}.`);
+if (failed.length) {
+  console.log("Failed roles (rerun, optionally with edited prompts):");
+  for (const f of failed) console.log(`  - ${f.slug}: ${f.reason}`);
+}

@@ -251,7 +251,7 @@ export const ROLE_PROMPTS = {
     "a sharp-eyed frontier woman in a dark dress with a wolf-fang amulet hidden at her throat, a charming smile that does not reach her cold eyes",
 
   "lunatic":
-    "a gaunt frontier man in rumpled village clothes with a maniacal grin and wide bloodshot eyes, a wolf claw scratch tattooed on the inside of one wrist",
+    "a wild-eyed frontier man in rumpled village clothes with a feverish unsettling stare and a crooked grin, a small wolf-fang charm tied at his wrist",
 
   "minion":
     "a servile frontier man in a plain coat bowing deeply, a hidden wolf-claw sigil burned into the back of his hand",
