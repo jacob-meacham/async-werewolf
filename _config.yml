@@ -39,3 +39,8 @@ exclude:
   - vendor/gems/
   - vendor/ruby/
   - agent-instructions/
+  - scripts/
+  - docs/
+  - package.json
+  - package-lock.json
+  - README.md
