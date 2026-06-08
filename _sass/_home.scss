@@ -1,0 +1,179 @@
+// Homepage editorial landing page. Everything is scoped under .home so it never
+// leaks into the rules/roles prose pages, which share .site-main typography.
+.home {
+
+  // ── Hero ──────────────────────────────────────────────────────────────────
+  .hero {
+    display: grid;
+    gap: clamp(24px, 4vw, 52px);
+    align-items: center;
+    margin: 4px 0 clamp(40px, 7vw, 72px);
+  }
+  @media (min-width: 820px) {
+    .hero { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); }
+  }
+  .hero__intro, .hero__plate { min-width: 0; }
+
+  .hero__eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--moonlight);
+    margin: 0 0 14px;
+  }
+  .hero__title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(46px, 6.5vw, 84px);
+    line-height: 0.96;
+    letter-spacing: 0.01em;
+    margin: 0 0 20px;
+  }
+  .hero__tagline {
+    font-size: clamp(17px, 2.4vw, 21px);
+    line-height: 1.5;
+    color: var(--ink-muted);
+    max-width: 46ch;
+    margin: 0 0 30px;
+  }
+  .hero__cta { display: flex; flex-wrap: wrap; gap: 12px; }
+
+  .hero__plate {
+    margin: 0;
+    padding: 10px;
+    background: var(--surface-raised);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: 0 22px 60px -32px rgba(0, 0, 0, 0.85);
+  }
+  .hero__plate img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 0 0 1px var(--line); // faux plate-mark
+  }
+
+  // ── Buttons ─────────────────────────────────────────────────────────────────
+  .btn {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 12px 20px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    color: var(--ink);
+    transition: border-color 0.25s var(--ease-out), color 0.25s var(--ease-out),
+                background 0.25s var(--ease-out);
+  }
+  .btn:hover { border-color: var(--moonlight); color: var(--moonlight); text-decoration: none; }
+  .btn--primary { background: var(--moonlight); color: var(--surface); border-color: transparent; }
+  .btn--primary:hover { background: var(--candle); color: var(--surface); }
+
+  // ── Lede + drop cap ─────────────────────────────────────────────────────────
+  .lede {
+    font-size: clamp(20px, 2.6vw, 24px);
+    line-height: 1.5;
+    color: var(--ink);
+    max-width: var(--measure);
+    margin: 0 0 1.2em;
+  }
+  .lede::first-letter {
+    float: left;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 3.6em;
+    line-height: 0.78;
+    padding: 0.04em 0.12em 0 0;
+    color: var(--moonlight);
+  }
+
+  // ── Section ornament rule ───────────────────────────────────────────────────
+  hr.ornament {
+    border: 0;
+    height: auto;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin: clamp(36px, 6vw, 56px) 0;
+  }
+  hr.ornament::before,
+  hr.ornament::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--line), transparent);
+  }
+
+  // Big section heading after the intro.
+  h2#rules {
+    font-size: clamp(30px, 4vw, 40px);
+    color: var(--ink);
+    margin: 0 0 0.6em;
+  }
+
+  // Headings clear the floated plates so each section starts clean.
+  h2 { clear: both; }
+
+  // ── Victory condition cards ─────────────────────────────────────────────────
+  .victory {
+    display: grid;
+    gap: 16px;
+    margin: 1.6em 0 0.8em;
+  }
+  @media (min-width: 680px) { .victory { grid-template-columns: 1fr 1fr; } }
+
+  .victory__card {
+    padding: 20px 22px;
+    background: var(--surface-raised);
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--moonlight);
+    border-radius: var(--radius);
+  }
+  .victory__card--wolf { border-top-color: var(--ember); }
+  .victory__card h3 {
+    margin: 0 0 8px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--moonlight);
+  }
+  .victory__card--wolf h3 { color: var(--ember); }
+  .victory__card p { margin: 0; max-width: none; color: var(--ink); }
+
+  // ── Inline field-guide plates ───────────────────────────────────────────────
+  .plate {
+    width: 248px;
+    max-width: 100%;
+    margin: 0.4em auto 1.4em;
+    padding: 10px 10px 0;
+    background: var(--surface-raised);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+  }
+  .plate img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 0 0 1px var(--line);
+  }
+  .plate figcaption {
+    padding: 10px 4px 12px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.03em;
+    line-height: 1.45;
+    text-align: center;
+    color: var(--ink-muted);
+  }
+  @media (min-width: 760px) {
+    .plate--right { float: right; margin: 0.4em 0 1.2em 36px; }
+    .plate--left  { float: left;  margin: 0.4em 36px 1.2em 0; }
+  }
+}
